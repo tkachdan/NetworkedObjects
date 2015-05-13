@@ -1,4 +1,4 @@
-package server.echoClient;
+package echo.echoClient;
 
 import org.glassfish.tyrus.client.ClientManager;
 

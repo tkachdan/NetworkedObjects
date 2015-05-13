@@ -1,4 +1,4 @@
-package server.echoServer;
+package echo.echoServer;
 
 import org.glassfish.tyrus.server.Server;
 
@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 public class EchoServer {
     @OnMessage
     public String onMessage(String message, Session session) {
+        System.out.println("message = " + message);
         return message;
     }
 
