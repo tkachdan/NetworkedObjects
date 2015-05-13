@@ -1,6 +1,7 @@
 package gameServer.server;
 
 import gameServer.decoders.UpstreamDecoder;
+import gameServer.models.MessageType;
 import gameServer.util.SessionHolder;
 import org.glassfish.tyrus.server.Server;
 

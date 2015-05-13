@@ -1,9 +1,9 @@
 package gameServer.client;
 
-import javax.websocket.ClientEndpoint;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import client.other.Point;
+import gameServer.models.MessageType;
+
+import javax.websocket.*;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
@@ -12,18 +12,37 @@ import java.util.concurrent.CountDownLatch;
  */
 @ClientEndpoint
 public class ClientAnnotated {
+    private Session session;
 
     @OnOpen
-    public void onOpen(Session p) {
-
+    public void onOpen(Session session) {
+        this.session = session;
     }
 
     @OnMessage
-    public void onMessage(String message) {
-        System.out.println(String.format("%s %s", "Received message: ", message));
+    public void onMessage(String message) throws IOException, EncodeException {
+        System.out.println("message = " + message);
+        if (message.equals("Game started")) {
+            System.out.println("Client:Game started");
+            // TODO: redo with controller and PositionHolder and other stuff
+            startSendingPosition();
+        }
+
     }
 
-    public static void main(String[] args) {
-
+    private void startSendingPosition() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        session.getBasicRemote().sendText(new Point(3, 5).toString());
+                        Thread.sleep(1000);
+                    }
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
