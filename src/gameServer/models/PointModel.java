@@ -12,10 +12,10 @@ package gameServer.models;
  * @author Scott Dexter
  *
  */
-public class Point implements Cloneable {
+public class PointModel implements Cloneable {
 	double x, y;
 
-	public Point(double inX, double inY) {
+	public PointModel(double inX, double inY) {
 		x = inX;
 		y = inY;
 	}
@@ -28,9 +28,9 @@ public class Point implements Cloneable {
 	 * @see Object#clone()
 	 */
 	@Override
-	public Point clone() {
+	public PointModel clone() {
 		try {
-			return (Point) super.clone();
+			return (PointModel) super.clone();
 		} catch (CloneNotSupportedException e) {
 			//  Auto-generated catch block
 			e.printStackTrace();
